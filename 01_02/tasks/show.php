@@ -39,10 +39,8 @@ echo "Connected successfully";
       <dt>ID</dt>
       <dd>
         <?php
-        $ids = mysqli_fetch_array(mysqli_query($sqli, "SELECT id FROM tasks"));
-        foreach ($ids as $id) {
-          echo "$id <br>";
-        }
+        $id = mysqli_fetch_array(mysqli_query($sqli, "SELECT id FROM tasks LIMIT 1"))[0];
+        echo "$id <br>";
         ?>
       </dd>
     </dl>
@@ -50,10 +48,8 @@ echo "Connected successfully";
       <dt>Priority</dt>
       <dd>
         <?php
-        $priors = mysqli_fetch_array(mysqli_query($sqli, "SELECT priority FROM tasks"));
-        foreach ($priors as $prior) {
-          echo "$prior <br>";
-        }
+        $prior = mysqli_fetch_array(mysqli_query($sqli, "SELECT priority FROM tasks LIMIT 1"))[0];
+        echo "$prior <br>";
         ?>
       </dd>
     </dl>
@@ -61,10 +57,8 @@ echo "Connected successfully";
       <dt>Completed</dt>
       <dd>
         <?php
-        $comps = mysqli_fetch_array(mysqli_query($sqli, "SELECT completed FROM tasks"));
-        foreach ($comps as $comp) {
-          echo "$comp <br>";
-        }
+        $comp = mysqli_fetch_array(mysqli_query($sqli, "SELECT completed FROM tasks LIMIT 1"))[0];
+        echo "$comp <br>";
         ?>
       </dd>
     </dl>
@@ -72,10 +66,8 @@ echo "Connected successfully";
       <dt>Description</dt>
       <dd>
         <?php
-        $descs = mysqli_fetch_array(mysqli_query($sqli, "SELECT description FROM tasks"));
-        foreach ($descs as $desc) {
-          echo "$desc <br>";
-        }
+        $desc = mysqli_fetch_array(mysqli_query($sqli, "SELECT description FROM tasks LIMIT 1"))[0];
+        echo "$desc <br>";
         ?>
       </dd>
     </dl>
