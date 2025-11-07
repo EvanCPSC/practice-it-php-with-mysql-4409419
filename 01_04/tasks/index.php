@@ -1,47 +1,65 @@
 <?php
 
-// hostname: "127.0.0.1"
-// username: "mariadb"
-// password: "mariadb"
-// database: "mariadb"
-// port:     3306
+//apachectl start
+
+$hostname = "127.0.0.1";
+$username = "mariadb";
+$password = "mariadb";
+$database = "mariadb";
+$port = 3306;
+
+$sqli = mysqli_connect($hostname, $username, $password, $database, $port);
+
+if (!$sqli) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
+$db = mysqli_query($sqli, "SELECT * FROM tasks ORDER BY priority");
 
 ?>
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Task Manager: Task List</title>
-  </head>
-  <body>
 
-    <header>
-      <h1>Task Manager</h1>
-    </header>
+<head>
+  <title>Task Manager: Task List</title>
+</head>
 
-    <section>
+<body>
 
-      <h1>Task List</h1>
+  <header>
+    <h1>Task Manager</h1>
+  </header>
 
-    	<table>
-    	  <tr>
-          <th>ID</th>
-          <th>Priority</th>
-          <th>Completed</th>
-    	    <th>Description</th>
-    	  </tr>
+  <section>
 
-        <?php // loop through tasks ?>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-      	    <td></td>
-      	  </tr>
-        <?php // end loop ?>
-    	</table>
+    <h1>Task List</h1>
 
-    </section>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Priority</th>
+        <th>Completed</th>
+        <th>Description</th>
+      </tr>
 
-  </body>
+      <?php // loop through tasks 
+      while ($row = mysqli_fetch_assoc($db)) {
+        echo "<tr>
+              <td>" . $row['id'] . "</td>
+              <td>" . $row['priority'] . "</td>
+              <td>" . $row['completed'] . "</td>
+              <td>" . $row['description'] . "</td>
+            </tr>";
+      }
+      ?>
+    </table>
+
+  </section>
+
+</body>
+<?php
+mysqli_close($sqli);
+?>
+
 </html>
