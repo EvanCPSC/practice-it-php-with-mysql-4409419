@@ -4,7 +4,7 @@
 $db = mysqli_connect("127.0.0.1", "mariadb", "mariadb", "mariadb", 3306);
 
 // Test if connection succeeded (recommended)
-if(mysqli_connect_errno()) {
+if (mysqli_connect_errno()) {
   $msg = "Database connection failed: ";
   $msg .= mysqli_connect_error();
   $msg .= " (" . mysqli_connect_errno() . ")";
@@ -12,12 +12,12 @@ if(mysqli_connect_errno()) {
 }
 
 // 2. Perform database query
-$sql = "SELECT * FROM tasks LIMIT 1";
+$sql = "SELECT * FROM tasks WHERE id=" . $_GET['id'];
 $result = mysqli_query($db, $sql);
 
 // Test if query succeeded (recommended)
 if (!$result) {
-	exit("Database query failed.");
+  exit("Database query failed.");
 }
 
 // 3. Use returned data (if any)
@@ -27,43 +27,46 @@ $task = mysqli_fetch_assoc($result);
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Task Manager: Show Task</title>
-  </head>
-  <body>
 
-    <header>
-      <h1>Task Manager</h1>
-    </header>
+<head>
+  <title>Task Manager: Show Task</title>
+</head>
 
-    <nav>
-      <a href="index.php">Task List</a>
-    </nav>
+<body>
 
-    <section>
+  <header>
+    <h1>Task Manager</h1>
+  </header>
 
-      <h1>Show Task</h1>
+  <nav>
+    <a href="index.php">Task List</a>
+  </nav>
 
-      <dl>
-        <dt>ID</dt>
-        <dd><?php echo $task['id']; ?></dd>
-      </dl>
-      <dl>
-        <dt>Priority</dt>
-        <dd><?php echo $task['priority']; ?></dd>
-      </dl>
-      <dl>
-        <dt>Completed</dt>
-        <dd><?php echo $task['completed'] == 1 ? 'true' : 'false'; ?></dd>
-      </dl>
-      <dl>
-        <dt>Description</dt>
-        <dd><?php echo $task['description']; ?></dd>
-      </dl>
+  <section>
 
-    </section>
+    <h1>Show Task</h1>
 
-  </body>
+    <dl>
+      <dt>ID</dt>
+      <dd><?php echo $task['id']; ?></dd>
+    </dl>
+    <dl>
+      <dt>Priority</dt>
+      <dd><?php echo $task['priority']; ?></dd>
+    </dl>
+    <dl>
+      <dt>Completed</dt>
+      <dd><?php echo $task['completed'] == 1 ? 'true' : 'false'; ?></dd>
+    </dl>
+    <dl>
+      <dt>Description</dt>
+      <dd><?php echo $task['description']; ?></dd>
+    </dl>
+
+  </section>
+
+</body>
+
 </html>
 
 <?php
