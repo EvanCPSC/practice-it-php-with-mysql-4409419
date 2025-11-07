@@ -7,7 +7,7 @@ $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 $db = mysqli_connect("127.0.0.1", "mariadb", "mariadb", "mariadb", 3306);
 
 // Test if connection succeeded (recommended)
-if(mysqli_connect_errno()) {
+if (mysqli_connect_errno()) {
   $msg = "Database connection failed: ";
   $msg .= mysqli_connect_error();
   $msg .= " (" . mysqli_connect_errno() . ")";
@@ -22,7 +22,7 @@ $result = mysqli_query($db, $sql);
 
 // Test if query succeeded (recommended)
 if (!$result) {
-	exit("Database query failed.");
+  exit("Database query failed.");
 }
 
 // 3. Use returned data (if any)
@@ -35,49 +35,52 @@ if (is_null($task)) {
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Task Manager: Show Task</title>
-  </head>
-  <body>
 
-    <header>
-      <h1>Task Manager</h1>
-    </header>
+<head>
+  <title>Task Manager: Show Task</title>
+</head>
 
-    <nav>
-      <a href="index.php">Task List</a>
-    </nav>
+<body>
 
-    <section>
+  <header>
+    <h1>Task Manager</h1>
+  </header>
 
-      <h1>Show Task</h1>
+  <nav>
+    <a href="index.php">Task List</a>
+  </nav>
 
-      <dl>
-        <dt>ID</dt>
-        <dd><?php echo $task['id']; ?></dd>
-      </dl>
-      <dl>
-        <dt>Description</dt>
-        <dd><?php echo $task['description']; ?></dd>
-      </dl>
-      <dl>
-        <dt>Priority</dt>
-        <dd><?php echo $task['priority']; ?></dd>
-      </dl>
-      <dl>
-        <dt>Completed</dt>
-        <dd><?php echo $task['completed'] == 1 ? 'true' : 'false'; ?></dd>
-      </dl>
+  <section>
 
-    </section>
-    
-    <hr />
+    <h1>Show Task</h1>
 
-    <form action="delete.php?id=" method="post" onsubmit="return confirm('Delete this task?');">
-      <input type="submit" value="Delete Task" />
-    </form>
+    <dl>
+      <dt>ID</dt>
+      <dd><?php echo $task['id']; ?></dd>
+    </dl>
+    <dl>
+      <dt>Description</dt>
+      <dd><?php echo $task['description']; ?></dd>
+    </dl>
+    <dl>
+      <dt>Priority</dt>
+      <dd><?php echo $task['priority']; ?></dd>
+    </dl>
+    <dl>
+      <dt>Completed</dt>
+      <dd><?php echo $task['completed'] == 1 ? 'true' : 'false'; ?></dd>
+    </dl>
 
-  </body>
+  </section>
+
+  <hr />
+
+  <form action="delete.php?id=<?php echo $task['id']; ?>" method="post" onsubmit="return confirm('Delete this task?');">
+    <input type="submit" value="Delete Task" />
+  </form>
+
+</body>
+
 </html>
 
 <?php
