@@ -70,7 +70,7 @@ if (!$result) {
             <td><?php echo $task['priority']; ?></td>
             <td><?php echo $task['completed'] == 1 ? 'true' : 'false'; ?></td>
       	    <td><?php echo $task['description']; ?></td>
-      	    <td><a href="show.php?id=">View</a></td>
+      	    <td><a href="show.php?id=<?php $task['id']?>">View</a></td>
       	  </tr>
         <?php } ?>
     	</table>
